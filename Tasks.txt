@@ -1,0 +1,3 @@
+- Rajouter des vérifications pour le name, l'adresse mail et le mot de passe lors de l'inscription
+- Rajouter des logs
+- Faire le migrate de la db depuis le code directement
