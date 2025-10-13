@@ -19,14 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <h1>Ajouter un utilisateur</h1>
-<form method="POST">
-    Nom: <input type="text" name="name" required><br>
-    Email: <input type="email" name="email" required><br>
-    Mot de passe: <input type="password" name="password" required><br>
+<form method="POST" enctype="multipart/form-data">
+    Nom: <input type="text" name="name" required><br><br>
+    Email: <input type="email" name="email" required><br><br>
+    Mot de passe: <input type="password" name="password" required><br><br>
     Rôle: 
     <select name="role">
         <option value="user">Utilisateur</option>
         <option value="admin">Admin</option>
-    </select><br>
+    </select><br><br>
+    <input type="file" name="profilePicture" size="5" required><br><br>
     <button type="submit">Ajouter</button>
 </form>
