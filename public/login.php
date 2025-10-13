@@ -10,15 +10,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     if (Auth::login($email, $password)) {
-        header('Location: admin.php');
-        exit;
+        if(Auth::checkAdmin()) {
+            header('Location: admin.php');
+            exit;
+        } else {
+            header('Location: userAccount.php');
+            exit;
+        }
+        
     } else {
         $error = "Identifiants invalides.";
     }
 }
 ?>
 
-<h2>Connexion administrateur</h2>
+<h2>Connexion</h2>
 <?php if (isset($error)) echo "<p style='color:red'>$error</p>"; ?>
 
 <form method="POST">
