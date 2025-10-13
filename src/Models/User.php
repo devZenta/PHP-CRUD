@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Config\Database;
+use Exception;
 use PDO;
 
 class User {
@@ -25,15 +26,14 @@ class User {
     }
 
     public function getByEmail(string $email): ?array {
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM {$this->table} WHERE email = ?");
         $stmt->execute([$email]);
-        $user = $stmt->fetch();
-        return $user ?: null;
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
-    public function create(string $name, string $email, string $password, string $role = 'user'): bool {
-        $stmt = $this->conn->prepare("INSERT INTO {$this->table} (name, email, password, role) VALUES (?, ?, ?, ?)");
-        return $stmt->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $role]);
+    public function create(string $name, string $email, string $password, string $role = 'user', string $profilePicture): bool {
+        $stmt = $this->conn->prepare("INSERT INTO {$this->table} (name, email, password, role, profile_picture) VALUES (?, ?, ?, ?, ?)");
+        return $stmt->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $role, $profilePicture]);
     }
 
     public function update(int $id, string $name, string $email, ?string $password = null): bool {
