@@ -39,6 +39,7 @@ class Database {
                 $this->password
             );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
         } catch(PDOException $e) {
             AppLogger::getLogger()->error("Database connection error: " . $e->getMessage());
             echo "Connection error: " . $e->getMessage();
