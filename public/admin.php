@@ -23,11 +23,18 @@ $users = $controller->index();
 <h2>Liste des utilisateurs</h2>
 <table border="1" cellpadding="5">
     <tr>
-        <th>ID</th><th>Nom</th><th>Email</th><th>Actions</th>
+        <th>ID</th><th>Photo</th><th>Nom</th><th>Email</th><th>Actions</th>
     </tr>
     <?php foreach ($users as $u): ?>
         <tr>
             <td><?= $u['id'] ?></td>
+            <td style="text-align: center;">
+                <?php if (!empty($u['profile_picture'])): ?>
+                    <img src="<?= htmlspecialchars($u['profile_picture']) ?>" alt="Photo de profil" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto;">
+                <?php else: ?>
+                    <span>Aucune photo</span>
+                <?php endif; ?>
+            </td>
             <td><?= htmlspecialchars($u['name']) ?></td>
             <td><?= htmlspecialchars($u['email']) ?></td>
             <td>
